@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
 
     void Respawn()
     {
-        transform.position = new Vector3(r.Next(-10, 10), 8f, 0);
+        transform.position = new Vector3(r.Next(-8, 8), 8f, 0);
     }
 
     private void OnTriggerEnter(Collider other)
