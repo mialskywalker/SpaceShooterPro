@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
         transform.position = new Vector3(r.Next(-8, 8), 8f, 0);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag.Equals("Player"))
         {
