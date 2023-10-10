@@ -52,6 +52,11 @@ public class Enemy : MonoBehaviour
         else if (other.tag.Equals("Laser"))
         {
             Destroy(other.gameObject);
+
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            Player player = playerObject.gameObject.transform.GetComponent<Player>();
+            player.AddToScore(10);
+            
             Destroy(this.gameObject);
         }
     }

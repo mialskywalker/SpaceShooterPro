@@ -22,6 +22,10 @@ public class Player : MonoBehaviour
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
     private bool _isShieldActive = false;
+    [SerializeField]
+    private int _score = 0;
+
+    private UIManager _uiManager;
     
     // Start is called before the first frame update
     void Start()
@@ -29,6 +33,7 @@ public class Player : MonoBehaviour
         // take the current position = new position (0, 0, 0)
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -123,6 +128,13 @@ public class Player : MonoBehaviour
         _isShieldActive = true;
         _shieldVisualizer.SetActive(true);
     }
+
+    public void AddToScore(int points)
+    {
+        _score += points;
+        _uiManager.UpdateScore(_score);
+    }
+    // communicate with the ui to update the score
 
     IEnumerator TripleShotPowerDownRoutine()
     {
