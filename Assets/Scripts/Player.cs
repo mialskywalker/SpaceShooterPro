@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     private float _canFire = -1f;
     [SerializeField]
     private int _lives = 3;
+    [SerializeField]
+    private bool _isPlayerDead = false;
     private SpawnManager _spawnManager;
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
@@ -103,9 +105,13 @@ public class Player : MonoBehaviour
         
         _lives -= 1;
 
+        _uiManager.UpdateLives(_lives);
+        
         if (_lives < 1)
         {
+            _isPlayerDead = true;
             _spawnManager.OnPlayerDeath();
+            OnPlayerDeath();
             Destroy(this.gameObject);
         }
     }
@@ -134,7 +140,14 @@ public class Player : MonoBehaviour
         _score += points;
         _uiManager.UpdateScore(_score);
     }
-    // communicate with the ui to update the score
+
+    public void OnPlayerDeath()
+    {
+        if (_isPlayerDead)
+        {
+            _uiManager.GameOver();
+        }
+    }
 
     IEnumerator TripleShotPowerDownRoutine()
     {

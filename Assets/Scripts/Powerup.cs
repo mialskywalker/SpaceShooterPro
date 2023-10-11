@@ -44,15 +44,12 @@ public class Powerup : MonoBehaviour
                 {
                     case 0:
                         player.TripleShotActive();
-                        Debug.Log("triple shot");
                         break;
                     case 1:
                         player.SpeedBoostActive();
-                        Debug.Log("speed boost");
                         break;
                     case 2:
                         player.ShieldsActive();
-                        Debug.Log("shield boost");
                         break;
                 }
             }
