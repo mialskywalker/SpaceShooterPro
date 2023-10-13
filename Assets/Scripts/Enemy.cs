@@ -11,11 +11,13 @@ public class Enemy : MonoBehaviour
 
     private Random r = new Random();
     private Animator _animator;
+    private bool _destroyed;
     
     // Start is called before the first frame update
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _destroyed = false;
     }
 
     // Update is called once per frame
@@ -59,9 +61,15 @@ public class Enemy : MonoBehaviour
             _speed = 0;
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             Player player = playerObject.gameObject.transform.GetComponent<Player>();
-            player.AddToScore(10);
-            
+
+            if (_destroyed ==  false)
+            {
+                player.AddToScore(10);
+            }
+            _destroyed = true;
             Destroy(this.gameObject, 1.0f);
+            
+
         }
     }
 }
