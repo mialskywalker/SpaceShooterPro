@@ -12,12 +12,14 @@ public class Enemy : MonoBehaviour
     private Random r = new Random();
     private Animator _animator;
     private bool _destroyed;
+    private AudioSource _audioSource;
     
     // Start is called before the first frame update
     void Start()
     {
         _animator = GetComponent<Animator>();
         _destroyed = false;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -52,6 +54,7 @@ public class Enemy : MonoBehaviour
             }
             _animator.SetTrigger("OnEnemyDeath");
             _speed = 0;
+            _audioSource.Play();
             Destroy(this.gameObject, 1.0f);
         }
         else if (other.tag.Equals("Laser"))
@@ -67,9 +70,8 @@ public class Enemy : MonoBehaviour
                 player.AddToScore(10);
             }
             _destroyed = true;
+            _audioSource.Play();
             Destroy(this.gameObject, 1.0f);
-            
-
         }
     }
 }

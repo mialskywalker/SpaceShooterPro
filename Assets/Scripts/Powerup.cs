@@ -10,13 +10,9 @@ public class Powerup : MonoBehaviour
     private float _speed = 3f;
     [SerializeField]
     private int powerupID;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    [SerializeField] private AudioClip _clip;
+
     void Update()
     {
         MoveDown();
@@ -33,13 +29,14 @@ public class Powerup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.tag.Equals("Player"))
         {
             Player player = other.transform.GetComponent<Player>();
+            AudioSource.PlayClipAtPoint(_clip, transform.position);
             
             if (player != null)
             {
-              
                 switch (powerupID)
                 {
                     case 0:
